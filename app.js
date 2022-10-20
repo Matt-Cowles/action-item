@@ -5,6 +5,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
+const Employee = require("./models/employee");
+
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/action-item");
 }
@@ -20,7 +22,8 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/team", async (req, res) => {
-  res.render("team");
+  const employee = new Employee({ name: "Matt Cowles", jobTitle: "Manufaccturing Tech IV" });
+  res.send(employee);
 });
 
 app.listen(3000, () => {
