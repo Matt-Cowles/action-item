@@ -23,7 +23,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/team", async (req, res) => {
   const employee = new Employee({ name: "Matt Cowles", jobTitle: "Manufaccturing Tech IV" });
-  res.send(employee);
+  res.render("team");
+});
+
+app.get("/addemplpoyee", (req, res) => {
+  res.render("addemployee");
 });
 
 app.listen(3000, () => {
