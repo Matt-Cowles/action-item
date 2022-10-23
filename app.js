@@ -26,7 +26,7 @@ app.get("/team", async (req, res) => {
   res.render("team");
 });
 
-app.get("/addemplpoyee", (req, res) => {
+app.get("/addemployee", (req, res) => {
   res.render("addemployee");
 });
 
