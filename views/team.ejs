@@ -1,13 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
 <br />
-
-<div class="row mt-5">
-  <div class="col-3 border border-dark m-auto">
-    <% for (let i = 0; i < 10; i++) { %>
-    <div class="card container m-auto mb-5 mt-5">
-      <div class="employee-name mb-5 text-center">Name Goes Here</div>
+<div class="container">
+  <div class="row mt-5">
+  <% for (let i = 0; i < 10; i++) { %>
+    <div class="col-4 m-auto">
+      <button class="card mb-5 mt-5 w-100 d-flex d-inline-flex">
+        <div class="container">
+        <div class="employee-name mb-5 text-center">Name Goes Here</div>
+        </div>
     </div>
-    <% } %>
+  <% } %>
   </div>
 </div>
