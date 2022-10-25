@@ -29,7 +29,7 @@ app.get("/team", async (req, res) => {
 
 app.get("/team/:id", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
-  res.render("employee");
+  res.render("employee", { employee });
 });
 
 app.get("/addemployee", (req, res) => {

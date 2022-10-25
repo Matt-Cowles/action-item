@@ -3,8 +3,8 @@
 <div class="card m-auto w-75 mt-5">
   <div class="card-container mt-5 mb-5">
     <div class="text-center">
-      <h3>Employee Name</h3>
-      <p>Employee Position</p>
+      <h3><%=employee.name%></h3>
+      <p><%=employee.position%></p>
 
       <div class="current-actions mt-5 mb-3">Current Action Items</div>
       <hr class="w-25 m-auto mb-3" />
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="">
-      <button class="btn btn-secondary w-75 offset-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Completed (#)</button>
+      <button class="btn w-75 offset-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb">Completed (#)</button>
 
       <div class="collapse w-75 offset-2" id="collapseExample">
         <ol class="card card-body">
