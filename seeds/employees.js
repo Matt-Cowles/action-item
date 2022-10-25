@@ -29,6 +29,6 @@ module.exports = [
   },
   {
     name: "Jazmin Batiste",
-    positon: "MFG Associate III",
+    position: "MFG Associate III",
   },
 ];
