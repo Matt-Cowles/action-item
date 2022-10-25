@@ -27,9 +27,9 @@ app.get("/team", async (req, res) => {
   // res.send(employee);
 });
 
-app.get("/team/:id", (req, res) => {
-  // res.render("employee");
-  res.send(req.body);
+app.get("/team/:id", async (req, res) => {
+  const employee = await Employee.findById(req.params.id);
+  res.render("employee");
 });
 
 app.get("/addemployee", (req, res) => {
