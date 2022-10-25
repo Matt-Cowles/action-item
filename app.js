@@ -22,9 +22,9 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/team", async (req, res) => {
-  const employee = new Employee({ name: "Matt Cowles", position: "Manufaccturing Tech IV" });
-  // res.render("team", { employee });
-  res.send(employee);
+  const employee = new Employee.find({});
+  res.render("team", { employee });
+  // res.send(employee);
 });
 
 app.get("/team/:id", (req, res) => {
