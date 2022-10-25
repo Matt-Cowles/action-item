@@ -28,7 +28,8 @@ app.get("/team", async (req, res) => {
 });
 
 app.get("/team/:id", (req, res) => {
-  res.render("employee");
+  // res.render("employee");
+  res.send(req.body);
 });
 
 app.get("/addemployee", (req, res) => {
