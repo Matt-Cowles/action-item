@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const EmployeeSchema = new Schema({
   name: String,
-  jobTitle: String,
+  position: String,
+  // worker: mongoose.Schema.ObjectId,
 });
 
 module.exports = mongoose.model("Employee", EmployeeSchema);
