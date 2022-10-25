@@ -3,13 +3,17 @@
 <br />
 <div class="container">
   <div class="row mt-5">
-  <% for (let i = 0; i < 10; i++) { %>
+  <% for (let employee of employees) { %>
     <div class="col-4 m-auto">
       <button class="card mb-5 mt-5 w-100 d-flex d-inline-flex">
         <div class="container">
-        <div class="employee-name mb-5 text-center">Name Goes Here</div>
+          <div class="mb-5 text-center">
+            <h5 class="mt-2"><%= employee.name %></h5>
+            <p class="mt-3 fs-9 fw-light"><%=employee.position%></p>
+          </div>
         </div>
     </div>
   <% } %>
   </div>
 </div>
+

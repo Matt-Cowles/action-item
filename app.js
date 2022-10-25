@@ -22,8 +22,8 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/team", async (req, res) => {
-  const employee = new Employee.find({});
-  res.render("team", { employee });
+  const employees = await Employee.find({});
+  res.render("team", { employees });
   // res.send(employee);
 });
 

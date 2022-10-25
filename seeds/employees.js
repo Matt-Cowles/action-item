@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     name: "James Holmes",
-    positon: "MFG Senior",
+    position: "MFG Senior",
   },
   {
     name: "Matt Cowles",
