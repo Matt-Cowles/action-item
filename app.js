@@ -30,20 +30,36 @@ app.get("/team/new", (req, res) => {
   res.render("new");
 });
 
-app.get("/team/:id", async (req, res) => {
-  const employee = await Employee.findById(req.params.id);
-  res.render("employee", { employee });
-});
-
-app.get("/team/:id/edit", (req, res) => {
-  res.render("edit");
-});
-
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
   res.redirect("/team");
   // res.send(req.body);
+});
+
+app.get("/team/:id", async (req, res) => {
+  const employee = await Employee.findById(req.params.id, {});
+  res.render("employee", { employee });
+});
+
+app.get("/team/:id/edit", async (req, res) => {
+  const employee = await Employee.findById(req.params.id);
+  res.render("edit", { employee });
+  // res.send(req.params);
+});
+
+app.put("/team/:id/edit", async (req, res) => {
+  try {
+    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee });
+    res.redirect(`/team/${employee._id}`);
+  } catch (e) {
+    console.log("ERRRRRRRRORRRRR", e);
+  }
+});
+
+app.delete("/team/:id/edit", async (req, res) => {
+  const employee = await Employee.findByIdAndDelete(req.params.id);
+  res.redirect("/team");
 });
 
 app.listen(3000, () => {
