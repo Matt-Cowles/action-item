@@ -60,6 +60,7 @@ app.put("/team/:id/edit", async (req, res) => {
 app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.redirect("/team");
+  // res.send("it worked");
 });
 
 app.listen(3000, () => {
