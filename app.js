@@ -24,7 +24,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   res.render("team", { employees });
-  // res.send(employee);
+});
+
+app.get("/team/new", (req, res) => {
+  res.render("new");
 });
 
 app.get("/team/:id", async (req, res) => {
@@ -32,8 +35,11 @@ app.get("/team/:id", async (req, res) => {
   res.render("employee", { employee });
 });
 
-app.get("/addemployee", (req, res) => {
-  res.render("addemployee");
+app.post("/employee", async (req, res) => {
+  const employee = new Employee(req.body.employee);
+  await employee.save();
+  res.redirect("/team");
+  // res.send(req.body);
 });
 
 app.listen(3000, () => {
