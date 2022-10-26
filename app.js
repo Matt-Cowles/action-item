@@ -35,6 +35,10 @@ app.get("/team/:id", async (req, res) => {
   res.render("employee", { employee });
 });
 
+app.get("/team/:id/edit", (req, res) => {
+  res.render("edit");
+});
+
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
