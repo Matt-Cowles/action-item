@@ -50,7 +50,7 @@ app.get("/team/:id/edit", async (req, res) => {
 
 app.put("/team/:id/edit", async (req, res) => {
   try {
-    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee });
+    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee }); // why do i need to specify the spread operator here? Wouldn't it just grab everything within employee anyways?
     res.redirect(`/team/${employee._id}`);
   } catch (e) {
     console.log("ERRRRRRRRORRRRR", e);
