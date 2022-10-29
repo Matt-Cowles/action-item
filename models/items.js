@@ -9,7 +9,9 @@ const itemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Employee",
   },
-  complete: Boolean,
+  complete: {
+    type: Boolean,
+    default: false,
 });
 
 module.exports = mongoose.model("Items", itemSchema);
