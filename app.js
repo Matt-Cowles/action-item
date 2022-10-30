@@ -41,7 +41,7 @@ app.post("/employee", async (req, res) => {
 app.get("/team/:id", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
   const items = await Item.findById(req.params.id);
-  res.render("employee", { employee, items });
+  res.render("./employees/employee", { employee, items });
 });
 
 app.get("/team/:id/edit", async (req, res) => {
