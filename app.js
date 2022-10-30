@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
 const Employee = require("./models/employee");
-const Item = require("./models/items");
+const Item = require("./models/item");
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/action-item");
@@ -28,7 +28,7 @@ app.get("/team", async (req, res) => {
 });
 
 app.get("/team/new", (req, res) => {
-  res.render("new");
+  res.render("./employees/new");
 });
 
 app.post("/employee", async (req, res) => {
@@ -40,8 +40,9 @@ app.post("/employee", async (req, res) => {
 
 app.get("/team/:id", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
-  const items = await Item.findById(req.params.id);
+  const items = await Item.find({ owner: req.params.id });
   res.render("./employees/employee", { employee, items });
+  console.log(items, items.title);
 });
 
 app.get("/team/:id/edit", async (req, res) => {
@@ -63,6 +64,13 @@ app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.redirect("/team");
   // res.send("it worked");
+});
+
+app.post("/item", async (req, res) => {
+  const item = new Item(req.body.item);
+  await item.save();
+  await employees.items.push(item.title);
+  res.redirect("/team/:id");
 });
 
 app.listen(3000, () => {

@@ -4,7 +4,12 @@ const { Schema } = mongoose;
 const EmployeeSchema = new Schema({
   name: String,
   position: String,
-  // worker: mongoose.Schema.ObjectId,
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Employee", EmployeeSchema);
