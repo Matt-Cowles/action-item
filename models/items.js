@@ -12,6 +12,7 @@ const itemSchema = new Schema({
   complete: {
     type: Boolean,
     default: false,
+  },
 });
 
-module.exports = mongoose.model("Items", itemSchema);
+module.exports = mongoose.model("Item", itemSchema);

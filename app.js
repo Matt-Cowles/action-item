@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
 const Employee = require("./models/employee");
+const Item = require("./models/items");
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/action-item");
@@ -39,6 +40,7 @@ app.post("/employee", async (req, res) => {
 
 app.get("/team/:id", async (req, res) => {
   const employee = await Employee.findById(req.params.id, {});
+  // const items = await Item.findById({ owner: req.params.id });
   res.render("employee", { employee });
 });
 
