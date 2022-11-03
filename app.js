@@ -47,7 +47,7 @@ app.get("/team/:id", async (req, res) => {
 
 app.get("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
-  res.render("edit", { employee });
+  res.render("./employees/edit", { employee });
   // res.send(req.params);
 });
 
@@ -64,6 +64,11 @@ app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.redirect("/team");
   // res.send("it worked");
+});
+
+app.get("/team/:id/:itemID", async (req, res) => {
+  const item = await Item.findById(req.params.itemID);
+  res.render("./items/list", { item });
 });
 
 app.post("/item", async (req, res) => {
