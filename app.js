@@ -35,14 +35,12 @@ app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
   res.redirect("/team");
-  // res.send(req.body);
 });
 
 app.get("/team/:id", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
   const items = await Item.find({ owner: req.params.id });
   res.render("./employees/employee", { employee, items });
-  console.log(items, items.title);
 });
 
 app.get("/team/:id/edit", async (req, res) => {
@@ -63,7 +61,6 @@ app.put("/team/:id/edit", async (req, res) => {
 app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.redirect("/team");
-  // res.send("it worked");
 });
 
 app.get("/team/:id/:itemID", async (req, res) => {
@@ -76,6 +73,10 @@ app.post("/item", async (req, res) => {
   await item.save();
   await employees.items.push(item.title);
   res.redirect("/team/:id");
+});
+
+app.put("/item/:id/edit", (req, res) => {
+  red.redirect("/team/:id/itemID");
 });
 
 app.listen(3000, () => {
