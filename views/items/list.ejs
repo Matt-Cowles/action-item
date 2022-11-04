@@ -14,6 +14,13 @@
     <div class="mb-3">
       <label for="name" class="form-label">Update:</label>
       <input type="text" class="form-control" name="item[update]" id="" aria-describedby="itemUpdate" placeholder="<%=item.update%>" />
+      <textarea name="" class="form-control" cols="30" rows="10">
+        <ul>
+          <% for (let update of item.update) { %>
+            <li><%=update%></li>
+          <% } %>
+        </ul>
+      </textarea>
     </div>
     <button type="submit" class="btn btn-primary mt-4 mb-4 offset-1 w-75">Update</button>
   </form>
