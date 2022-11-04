@@ -5,7 +5,7 @@ const itemSchema = new Schema({
   title: String,
   desc: String,
   update: [String],
-  dueDate: Number,
+  dueDate: Date,
   owner: {
     type: Schema.Types.ObjectId,
     ref: "Employee",
