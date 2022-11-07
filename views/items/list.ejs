@@ -8,8 +8,10 @@
       <input type="text" class="form-control" name="item[desc]" id="" aria-describedby="itemDescription" placeholder="<%=item.desc%>" />
     </div>
     <div class="mb-1 mt-5">
-      <span class="me-2">Due:</span>
-      <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
+      <div class="">
+        <label class="me-2 form-label" for="date">Due:</label>
+      </div>
+      <input type="date" class="form form-md mb-3" aria-label=".form-md example" name="item[dueDate]" />
     </div>
     <div class="mb-3">
       <label for="name" class="form-label">Update:</label>
@@ -25,11 +27,11 @@
           <div class="form-floating">
             <textarea class="form-control" placeholder="Enter New Update" id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Enter New Update</label>
+            <button type="submit" class="btn btn-primary mt-4 mb-4 offset-3 w-50">Create Update</button>
           </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-4 mb-4 offset-1 w-75">Update</button>
   </form>
 
   <form action="/team/<%=item._id%>/edit?_method=DELETE" method="POST">
