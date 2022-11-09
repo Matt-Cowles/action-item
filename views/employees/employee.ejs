@@ -37,6 +37,9 @@
             <button class="btn w-100 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb"><%= item.title%></button>
 
             <div class="collapse w-100 ms-3" id="multiCollapseExample<%=i%>">
+              <% if(item.newUpdate === true) { %>
+              <label for="update">New Update:</label>
+              <% } %>
               <ol class="mt-3">
                 <li>this</li>
                 <li>is</li>

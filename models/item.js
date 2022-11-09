@@ -14,6 +14,10 @@ const itemSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  newUpdate: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Item", itemSchema);
