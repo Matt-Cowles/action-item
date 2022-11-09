@@ -75,6 +75,10 @@ app.post("/item", async (req, res) => {
   res.redirect("/team/:id");
 });
 
+app.get("/item/:id/edit", async (req, res) => {
+  res.send("hola amigo");
+});
+
 app.put("/item/:id/edit", (req, res) => {
   red.redirect("/team/:id/itemID");
 });
