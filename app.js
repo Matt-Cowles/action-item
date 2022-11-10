@@ -76,7 +76,9 @@ app.post("/item", async (req, res) => {
 });
 
 app.get("/item/:id/edit", async (req, res) => {
-  res.send("hola amigo");
+  const item = await Item.findById(req.params.id);
+  console.log(req.params);
+  res.render("./items/edit", { item });
 });
 
 app.put("/item/:id/edit", (req, res) => {
