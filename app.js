@@ -88,6 +88,8 @@ app.put("/item/:id/edit", (req, res) => {
   red.redirect("/team/:id/itemID");
 });
 
+app.post("/confirm-update", async (req, res) => {});
+
 app.listen(3000, () => {
   console.log("listening on port 3000");
 });
