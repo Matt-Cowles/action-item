@@ -93,11 +93,11 @@ app.put("/item/:id/edit", async (req, res) => {
   res.redirect(`/team/${employeeID}`);
 });
 
-app.put("/item/:id/confirm", async (req, res) => {
+app.put("/item/:id/confirm-update", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
-  item.newUpdate = true;
+  item.newUpdate = false;
   await item.save();
   res.redirect(`/team/${employeeID}`);
 });
