@@ -44,15 +44,19 @@
               </a>
 
               <div class="collapse w-100 ms-3" id="multiCollapseExample<%=i%>">
+                <!-- If item has new update, it will display it at the top of action item drop down menu -->
+
                 <% if(item.newUpdate === true ) { %>
                 <label for="update" class="form-control mt-3" style="background-color: #f2f589">
                   <span class="fw-bold">New Update:</span>
                   <span class="ms-3"><%=item.update%></span>
                 </label>
                 <form action="/item/<%=item.id%>/confirm-update?_method=PUT" method="POST">
-                  <button class="btn btn-primary mt-2 w-25 offset-5 mb-5">Confirm</button>
+                  <button class="btn btn-primary mt-2 w-50 offset-3 mb-5">Confirm Update</button>
                 </form>
                 <% } %>
+
+                <!-- Table displaying information of action item -->
 
                 <table class="table table-borderless ms-5 mt-3 w-75">
                   <tbody>
@@ -76,6 +80,29 @@
                     </tr>
                   </tbody>
                 </table>
+
+                <!-- Popup window to create a new update -->
+
+                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><%=item.title%></h1>
+                        <button type="button" class="btn-close offset-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Enter New Update:</label>
+                      </div>
+                      <div class="mt-3 mb-3 text-center">
+                        <form action="">
+                          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create Update!</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn btn-primary offset-3 mb-5 w-50 mt-5" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Create a new Update!</a>
               </div>
             </div>
           </li>
