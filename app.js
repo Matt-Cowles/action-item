@@ -85,10 +85,14 @@ app.get("/item/:id/edit", async (req, res) => {
 });
 
 app.put("/item/:id/edit", (req, res) => {
-  red.redirect("/team/:id/itemID");
+  res.redirect("/team/:id/itemID");
 });
 
-app.post("/confirm-update", async (req, res) => {});
+app.post("/confirm-update", async (req, res) => {
+  const item = await Item.findByIdAndUpdate(req.params.id);
+  console.log(req.params);
+  // item.newUpdate = false;
+});
 
 app.listen(3000, () => {
   console.log("listening on port 3000");
