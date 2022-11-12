@@ -50,24 +50,29 @@
                   <span class="ms-3"><%=item.update%></span>
                 </label>
                 <form action="/item/<%=item.id%>/confirm-update?_method=PUT" method="POST">
-                  <button class="btn btn-primary mt-2 w-25 offset-4">Confirm</button>   
+                  <button class="btn btn-primary mt-2 w-25 offset-4 mb-5">Confirm</button>   
                 </form>
               <% } %>
-              <div class="mb-3">
-                <label for="name" class="form-label w-50">Description:</label>
-                <input type="text" class="form-control w-50" name="item[desc]" id="" aria-describedby="itemDescription" placeholder="<%=item.desc%>" />
-              </div>
-              <div class="mb-1 mt-5">
-                <span class="me-2">Due:</span>
-                <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
-              </div>
-              <div class="mb-3">
-                <label for="name" class="form-label">Update:</label>
-                <ul class="form-control list-group list-group-flush">
-                  <% for (let update of item.update) { %>
-                  <li class="list-group-item"><%=update%></li>
-                  <% } %>
-                </ul>
+
+                <div class="w-75 offset-2 mt-5">
+                  <div class="mb-3">
+                    <span class="fw-bold">Description:</span>
+                    <span class="ms-3 w-75"><%=item.desc%></span>
+                  </div>
+
+                  <div class="mb-1 mt-5">
+                    <span class="me-2">Due:</span>
+                    <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
+                  </div>
+
+                  <div class="mb-3">
+                  <label for="name" class="form-label">Update:</label>
+                  <ul class="form-control list-group list-group-flush">
+                    <% for (let update of item.update) { %>
+                      <li class="list-group-item"><%=update%></li>
+                    <% } %>
+                  </ul>
+                </div>
               </div>
             </div>
           </li>
