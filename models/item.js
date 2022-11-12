@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 const itemSchema = new Schema({
   title: String,
   desc: String,
-  update: [String],
+  update: [
+    {
+      type: String,
+    },
+  ],
   dueDate: Date,
   owner: {
     type: Schema.Types.ObjectId,
