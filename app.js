@@ -93,10 +93,13 @@ app.put("/item/:id/edit", async (req, res) => {
   res.redirect(`/team/${employeeID}`);
 });
 
-app.put("/confirm-update", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id);
-  console.log(req.params);
-  // item.newUpdate = false;
+app.put("/item/:id/confirm", async (req, res) => {
+  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+  const employee = await Employee.find(item.owner);
+  const employeeID = employee[0].id;
+  item.newUpdate = true;
+  await item.save();
+  res.redirect(`/team/${employeeID}`);
 });
 
 app.listen(3000, () => {
