@@ -75,9 +75,12 @@ app.post("/item", async (req, res) => {
   res.redirect("/team/:id");
 });
 
+app.get("/item/new", (req, res) => {
+  res.render("./items/new");
+});
+
 app.get("/item/:id/edit", async (req, res) => {
   const item = await Item.findById(req.params.id);
-  console.log(req.params);
   res.render("./items/edit", { item });
 });
 
