@@ -88,7 +88,7 @@ app.put("/item/:id/edit", (req, res) => {
   res.redirect("/team/:id/itemID");
 });
 
-app.post("/confirm-update", async (req, res) => {
+app.put("/confirm-update", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id);
   console.log(req.params);
   // item.newUpdate = false;
