@@ -63,11 +63,6 @@ app.delete("/team/:id/edit", async (req, res) => {
   res.redirect("/team");
 });
 
-app.get("/team/:id/:itemID", async (req, res) => {
-  const item = await Item.findById(req.params.itemID);
-  res.render("./items/list", { item });
-});
-
 app.post("/item", async (req, res) => {
   const item = new Item(req.body.item);
   await item.save();
@@ -77,6 +72,11 @@ app.post("/item", async (req, res) => {
 
 app.get("/item/new", (req, res) => {
   res.render("./items/new");
+});
+
+app.get("/item/:id", async (req, res) => {
+  const item = await Item.findById(req.params.id);
+  res.render("./items/list", { item });
 });
 
 app.get("/item/:id/edit", async (req, res) => {
