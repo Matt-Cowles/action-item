@@ -102,6 +102,15 @@ app.put("/item/:id/confirm-update", async (req, res) => {
   res.redirect(`/team/${employeeID}`);
 });
 
+app.put("/item/:id/mark-complete", async (req, res) => {
+  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+  const employee = await Employee.find(item.owner);
+  const employeeID = employee[0].id;
+  item.complete = true;
+  item.save();
+  res.redirect(`/team/${employeeID}`);
+});
+
 app.listen(3000, () => {
   console.log("listening on port 3000");
 });
