@@ -76,7 +76,7 @@ app.get("/item/new", (req, res) => {
 
 app.get("/item/:id", async (req, res) => {
   const item = await Item.findById(req.params.id);
-  res.render("./items/list", { item });
+  res.render("./items/complete", { item });
 });
 
 app.get("/item/:id/edit", async (req, res) => {
