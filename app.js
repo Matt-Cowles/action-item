@@ -115,7 +115,11 @@ app.put("/item/:id/mark-complete", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
-  item.complete = true;
+  if (item.complete === false) {
+    item.complete = true;
+  } else {
+    item.complete = false;
+  }
   item.save();
   res.redirect(`/team/${employeeID}`);
 });
