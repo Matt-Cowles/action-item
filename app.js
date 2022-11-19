@@ -24,7 +24,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
-  res.render("team", { employees });
+  const items = await Item.find({});
+  console.log(employees);
+  console.log(items);
+
+  res.render("team", { employees, items });
 });
 
 app.get("/team/new", (req, res) => {

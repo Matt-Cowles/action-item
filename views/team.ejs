@@ -8,6 +8,9 @@
       <a href="/team/<%=employee._id%>" class="text-decoration-none">
         <button class="card mb-5 mt-5 w-100 d-flex d-inline-flex">
           <div class="container">
+            <% if (items.newUpdate === false) { %>
+              <div class="mb-5 text-center" style="background-color: #f2f589;">
+            <% } %>
             <div class="mb-5 text-center">
               <h5 class="mt-2"><%= employee.name %></h5>
               <p class="mt-2 fs-9 fw-light"><%=employee.position%></p>
