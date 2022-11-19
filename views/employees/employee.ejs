@@ -33,9 +33,21 @@
         </div>
         <ol class="mt-3">
           <% let i = 1 %> <% for (let item of items) { %> <% if (item.complete === false) { %>
-          <li class="mt-3">
+          
+            <li class="mt-3" >
             <div class="position-relative">
+
+              <!-- Checks if there is a new update, and if there is, the background of that action item will be yellow -->
+
+              <%if (item.newUpdate === true) { %>
+
+                <button class="btn action-item-btn w-100 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample" style="background-color: #f2f589"><%= item.title%></button>
+                
+              <% } else { %>
+
               <button class="btn action-item-btn w-100 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb"><%= item.title%></button>
+              
+              <% } %> 
 
               <!-- Create Check Complete Button on left side of the action item title -->
 
