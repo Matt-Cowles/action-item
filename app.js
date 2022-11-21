@@ -55,7 +55,7 @@ app.get("/team/:id/edit", async (req, res) => {
 
 app.put("/team/:id/edit", async (req, res) => {
   try {
-    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee }); // why do i need to specify the spread operator here? Wouldn't it just grab everything within employee anyways?
+    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee });
     res.redirect(`/team/${employee._id}`);
   } catch (e) {
     console.log("ERRRRRRRRORRRRR", e);
@@ -67,11 +67,12 @@ app.delete("/team/:id/edit", async (req, res) => {
   res.redirect("/team");
 });
 
-app.post("/item", async (req, res) => {
-  const item = new Item(req.body.item);
-  await item.save();
-  await employees.items.push(item.title);
-  res.redirect("/team/:id");
+app.post("/team/:id/new-item", async (req, res) => {
+  // const item = new Item(req.body.item);
+  // await item.save();
+  // await employees.items.push(item.title);
+  // res.redirect("/team/:id");
+  res.send("it wroked");
 });
 
 app.get("/item/new", (req, res) => {
