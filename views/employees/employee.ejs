@@ -45,7 +45,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="message-text" class="col-form-label">Description:</label>
-                      <textarea class="form-control" id="message-text" name="item[dueDate]"></textarea>
+                      <textarea class="form-control" id="message-text" name="item[desc]"></textarea>
                     </div>
                     <div class="mb-3 mt-4">
                       <label for="message-text" class="col-form-label me-2">Due Date:</label>
@@ -69,7 +69,7 @@
             <div class="position-relative">
 
               
-              <!-- Create Check Complete Button on left side of the action item title -->
+              <!-- Create Check Complete Button on left side of the action item title bar -->
               
               <form action="/item/<%=item._id%>/mark-complete?_method=PUT" method="POST">
                 <button class="position-absolute top-0 start-0 btn ms-4">
@@ -79,7 +79,7 @@
                 </button>
               </form>
 
-              <!-- Create Edit Pencil Button on the right side of the action item title -->
+              <!-- Create Edit Pencil Button on the right side of the action item title bar -->
               
               <a href="/item/<%=item._id%>/edit" class="position-absolute top-0 end-0 btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -149,12 +149,12 @@
                         <h1 class="modal-title fs-5" id="exampleModalToggleLabelUpdate"><%=item.title%></h1>
                         <button type="button" class="btn-close offset-3" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                    <form action="/item/<%=item.id%>/new-update?_method=PUT" method="POST">
-                      <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="floatingTextarea2">Enter New Update:</label>
-                      </div>
-                      <div class="mt-3 mb-3 text-center">
+                      <form action="/item/<%=item.id%>/new-update?_method=PUT" method="POST">
+                        <div class="form-floating">
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                          <label for="floatingTextarea2">Enter New Update:</label>
+                        </div>
+                        <div class="mt-3 mb-3 text-center">
                           <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create Update!</button>
                         </form>
                       </div>

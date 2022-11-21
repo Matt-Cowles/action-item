@@ -65,11 +65,15 @@ app.delete("/team/:id/edit", async (req, res) => {
 });
 
 app.post("/team/:id/new-item", async (req, res) => {
-  // const item = new Item(req.body.item);
-  // await item.save();
-  // await employees.items.push(item.title);
-  // res.redirect("/team/:id");
-  res.send("it wroked");
+  const item = new Item(req.body.item);
+  const employee = await Employee.findById(req.params.id);
+  console.log(req.body);
+  console.log(req.params);
+  item.owner = employee._id;
+  await item.save();
+  await employee.items.push(item);
+  await employee.save();
+  res.redirect(`/team/${employee._id}`);
 });
 
 app.get("/item/new", (req, res) => {
