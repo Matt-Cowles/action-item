@@ -52,7 +52,7 @@
                       <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
                     </div>
                     <hr class="w-100 mt-5" />
-                    <button class="btn btn-primary offset-3 mt-3 w-50">Create Action Item</button>
+                    <button class="btn btn-primary offset-3 mt-3 mb-3 w-50">Create Action Item</button>
                   </div>
                 </form>
               </div>
@@ -131,13 +131,13 @@
                       <th scope="row">Updates:</th>
                       <td>
                         <ul class="form-control list-group list-group-flush">
-                          <% if(item.update.length > 0) { %> 
+                          <% if (item.update.length > 0) { %>
                             <% for(let update of item.update) { %>
                             <li class="list-group-item"><%=update%></li>
                           <% } %>
                           <% } else { %>
-                          <span class="text-center">No Updates to Display</span>
-                          <% } %>
+                              <li class="list-group-item text-center">No Updates Have Been Made</li>
+                          <% } %> 
                         </ul>
                       </td>
                     </tr>
@@ -146,27 +146,28 @@
 
                 <!-- Popup window to create a new update -->
 
-                <div class="modal fade" id="exampleModalToggleUpdate" aria-hidden="true" aria-labelledby="exampleModalToggleLabelUpdate" tabindex="-2">
+                <div class="modal fade" id="exampleModalToggleUpdate<%=i%>" aria-hidden="true" aria-labelledby="exampleModalToggleLabelUpdate" tabindex="-2">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalToggleLabelUpdate"><%=item.title%></h1>
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabelUpdate<%=i%>"><%=item.title%></h1>
                         <button type="button" class="btn-close offset-3" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <form action="/item/<%=item.id%>/new-update?_method=PUT" method="POST">
                         <div class="form-floating">
-                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="item[update]"></textarea>
                           <label for="floatingTextarea2">Enter New Update:</label>
+                          
                         </div>
                         <div class="mt-3 mb-3 text-center">
                           <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Create Update!</button>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <a class="btn btn-primary offset-3 mb-5 w-50 mt-3" data-bs-toggle="modal" href="#exampleModalToggleUpdate<%=i%>" role="button">Create a new Update!</a>
                 </div>
-                <a class="btn btn-primary offset-3 mb-5 w-50 mt-3" data-bs-toggle="modal" href="#exampleModalToggleUpdate" role="button">Create a new Update!</a>
-              </div>
+              </form>
             </div>
           </li>
           <% } %> <% i++ %> <% } %>

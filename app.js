@@ -67,8 +67,6 @@ app.delete("/team/:id/edit", async (req, res) => {
 app.post("/team/:id/new-item", async (req, res) => {
   const item = new Item(req.body.item);
   const employee = await Employee.findById(req.params.id);
-  console.log(req.body);
-  console.log(req.params);
   item.owner = employee._id;
   await item.save();
   await employee.items.push(item);
@@ -99,11 +97,11 @@ app.put("/item/:id/edit", async (req, res) => {
 });
 
 app.put("/item/:id/new-update", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+  const item = await Item.findByIdAndUpdate(req.params.id);
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
-  // item.push(req.body.item);
-  console.log(item.update);
+  item.newUpdate = true;
+  await item.update.push(req.body.item.update);
   await item.save();
   res.redirect(`/team/${employeeID}`);
 });
