@@ -131,8 +131,12 @@
                       <th scope="row">Updates:</th>
                       <td>
                         <ul class="form-control list-group list-group-flush">
-                          <% for(let update of item.update) { %>
-                          <li class="list-group-item"><%=update%></li>
+                          <% if(item.update.length > 0) { %> 
+                            <% for(let update of item.update) { %>
+                            <li class="list-group-item"><%=update%></li>
+                          <% } %>
+                          <% } else { %>
+                          <span class="text-center">No Updates to Display</span>
                           <% } %>
                         </ul>
                       </td>
