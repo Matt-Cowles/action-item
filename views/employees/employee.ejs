@@ -47,14 +47,12 @@
                       <label for="message-text" class="col-form-label">Description:</label>
                       <textarea class="form-control" id="message-text" name="item[dueDate]"></textarea>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 mt-4">
                       <label for="message-text" class="col-form-label me-2">Due Date:</label>
                       <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
                     </div>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary ms-3" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary me-3">Create Action Item</button>
+                    <hr class="w-100 mt-5" />
+                    <button class="btn btn-primary offset-3 mt-3 w-50">Create Action Item</button>
                   </div>
                 </form>
               </div>
@@ -97,7 +95,7 @@
                 
               <% } else { %>
 
-              <button class="btn action-item-btn w-100 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb"><%= item.title%></button>
+                <button class="btn action-item-btn w-100 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb"><%= item.title%></button>
               
               <% } %> 
 

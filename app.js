@@ -25,9 +25,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   const items = await Item.find({});
-  console.log(employees);
-  console.log(items);
-
   res.render("team", { employees, items });
 });
 
