@@ -87,7 +87,7 @@
                 </svg>
               </a>
 
-              <!-- Creates drop down menu button. Also checks if there is a new update, and if there is, the background of that action item will be yellow-->
+              <!-- Creates drop down menu button. Also checks if there is a new update, the background of that action item will be yellow-->
 
               <%if (item.newUpdate === true) { %>
 
@@ -108,7 +108,7 @@
                 <% if(item.newUpdate === true ) { %>
                 <label for="update" class="form-control mt-3" style="background-color: #f2f589">
                   <span class="fw-bold">New Update:</span>
-                  <span class="ms-3"><%=item.update%></span>
+                  <span class="ms-3"><%=item.update[item.update.length - 1]%></span>
                 </label>
                 <form action="/item/<%=item.id%>/confirm-update?_method=PUT" method="POST">
                   <button class="btn btn-outline-primary mt-2 w-50 offset-3 mb-5">Confirm Update</button>
@@ -165,7 +165,7 @@
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary offset-3 mb-5 w-50 mt-3" data-bs-toggle="modal" href="#exampleModalToggleUpdate<%=i%>" role="button">Create a new Update!</a>
+                  <a class="btn btn-primary offset-3 mb-3 w-50 mt-3" data-bs-toggle="modal" href="#exampleModalToggleUpdate<%=i%>" role="button">Create a new Update!</a>
                 </div>
               </form>
             </div>

@@ -25,6 +25,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   const items = await Item.find({});
+  for (let item of items) {
+    if (item.newUpdate === true) {
+      const employeeUpdate = await Employee.find({ items: item._id });
+      // const card = document.querySelector(".card-btn");
+      // card.classList.add("highlight");
+    }
+  }
   res.render("team", { employees, items });
 });
 
