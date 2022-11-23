@@ -1,6 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
-<script src="../app.js" defer></script>
+<!-- <script src="../app.js" defer></script> -->
+<link rel="stylesheet" href="../public/stylesheets/newUpdate.css" />
 
 <br />
 <div class="container">
@@ -8,7 +9,6 @@
     <% for (let employee of employees) { %>
     <div class="col-4 m-auto">
       <a href="/team/<%=employee._id%>" class="text-decoration-none">
-        <!-- <button class="card mb-5 mt-5 w-100 d-flex d-inline-flex" style="background-color: #f2f589"> -->
         <button class="card card-btn mb-5 mt-5 w-100 d-flex d-inline-flex">
           <div class="container">
             <div class="mb-5 text-center">
