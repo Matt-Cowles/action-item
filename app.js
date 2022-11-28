@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const cheerio = require("cheerio");
+const flash = require("connect-flash");
 
 const Employee = require("./models/employee");
 const Item = require("./models/item");
@@ -22,20 +22,15 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(flash());
+
+// app.use((req, res, next) => {});
 
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
-  const items = await Item.find({});
-
-  for (let item of items) {
-    if (item.newUpdate === true) {
-      const $ = cheerio.load('<button class="card card-btn mb-5 mt-5 w-100 d-flex d-inline-flex">', null, null);
-      console.log($.html());
-      $("button").addClass("highlight");
-      console.log($.html());
-    }
-  }
-  res.render("team", { employees, items });
+  const updatedItems = await Item.find({ newUpdate: true });
+  console.log(updatedItems.owner);
+  res.render("team", { employees, updatedItems });
 });
 
 app.get("/team/new", (req, res) => {
@@ -45,6 +40,7 @@ app.get("/team/new", (req, res) => {
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
+  res.flash("success", "Welcome new Uuser");
   res.redirect("/team");
 });
 
@@ -129,11 +125,7 @@ app.put("/item/:id/mark-complete", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
-  if (item.complete === false) {
-    item.complete = true;
-  } else {
-    item.complete = false;
-  }
+  item.complete === false ? (item.complete = true) : (item.complete = false);
   item.save();
   res.redirect(`/team/${employeeID}`);
 });
