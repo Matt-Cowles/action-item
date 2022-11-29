@@ -29,7 +29,6 @@ app.use(flash());
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   const updatedItems = await Item.find({ newUpdate: true });
-  console.log(updatedItems.owner);
   res.render("team", { employees, updatedItems });
 });
 

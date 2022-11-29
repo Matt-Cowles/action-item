@@ -1,15 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
 <!-- <script src="../app.js" defer></script> -->
-<link rel="stylesheet" href="../public/stylesheets/newUpdate.css" />
+<link rel="stylesheet" href="/stylesheets/newUpdate.css" />
 
 <br />
 <div class="container">
   <div class="row mt-5">
-    <% for (let employee of employees) { %>
+    <% let i= 0; for (let employee of employees) { %>
     <div class="col-4 m-auto">
       <a href="/team/<%=employee._id%>" class="text-decoration-none">
-        <button class="card card-btn mb-5 mt-5 w-100 d-flex d-inline-flex">
+        <button class="card mb-5 mt-5 w-100 d-flex d-inline-flex">
           <div class="container">
             <div class="mb-5 text-center">
               <h5 class="mt-2"><%= employee.name %></h5>
@@ -19,6 +19,21 @@
         </button>
       </a>
     </div>
-    <% } %>
+    <% i++; } %>
   </div>
 </div>
+
+<!-- 
+<script>
+  console.log("test");
+  for (let item of updatedItems) {
+    console.log("test 2");
+    if (item.owner === employee._id) {
+      console.log("test 3");
+      const card = document.querySelector(".card");
+      card.classList.add("highlight");
+    }
+  }
+</script> -->
+
+<script src="/javascripts/team.js"></script>
