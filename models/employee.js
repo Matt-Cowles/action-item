@@ -10,6 +10,10 @@ const EmployeeSchema = new Schema({
       ref: "Item",
     },
   ],
+  newUpdate: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Employee", EmployeeSchema);

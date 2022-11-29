@@ -37,7 +37,6 @@ app.use((req, res, next) => {
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   const updatedItems = await Item.find({ newUpdate: true });
-  console.log(req.session);
   res.render("team", { employees, updatedItems });
 });
 
@@ -66,9 +65,12 @@ app.get("/team/:id/edit", async (req, res) => {
 app.put("/team/:id/edit", async (req, res) => {
   try {
     const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee });
+    req.flash("success", `Successfully updated ${employee.name} info!`);
     res.redirect(`/team/${employee._id}`);
   } catch (e) {
+    req.flash("error", `Failed to update ${employee.name} info`);
     console.log("ERRRRRRRRORRRRR", e);
+    res.redirect(`/team/${employee._id}`);
   }
 });
 
@@ -115,8 +117,10 @@ app.put("/item/:id/new-update", async (req, res) => {
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
   item.newUpdate = true;
+  employee[0].newUpdate = true;
   await item.update.push(req.body.item.update);
   await item.save();
+  await employee[0].save();
   res.redirect(`/team/${employeeID}`);
 });
 
