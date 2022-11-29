@@ -48,7 +48,7 @@ app.get("/team/new", (req, res) => {
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
-  req.flash("success", "Welcome new User");
+  req.flash("success", `Welcome to the team ${employee.name}!`);
   res.redirect("/team");
 });
 
@@ -74,6 +74,7 @@ app.put("/team/:id/edit", async (req, res) => {
 
 app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
+  req.flash("success", `${employee.name} was succuessfully removed from the team.`);
   res.redirect("/team");
 });
 
@@ -135,6 +136,10 @@ app.put("/item/:id/mark-complete", async (req, res) => {
   item.complete === false ? (item.complete = true) : (item.complete = false);
   item.save();
   res.redirect(`/team/${employeeID}`);
+});
+
+app.get("*", (req, res) => {
+  res.render("wrongLocation");
 });
 
 app.listen(3000, () => {
