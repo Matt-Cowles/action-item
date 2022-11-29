@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
 const flash = require("connect-flash");
 
 const Employee = require("./models/employee");
@@ -15,6 +16,9 @@ async function main() {
 main().then(() => console.log("Connected to db"));
 main().catch((err) => console.log("AN ERROR!", err));
 
+const sessionOptions = { secret: "thisisabadsecret", resave: false, saveUninitialized: true };
+app.use(session(sessionOptions));
+
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -24,11 +28,16 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 
-// app.use((req, res, next) => {});
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.get("/team", async (req, res) => {
   const employees = await Employee.find({});
   const updatedItems = await Item.find({ newUpdate: true });
+  console.log(req.session);
   res.render("team", { employees, updatedItems });
 });
 
@@ -39,7 +48,7 @@ app.get("/team/new", (req, res) => {
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
-  res.flash("success", "Welcome new Uuser");
+  req.flash("success", "Welcome new User");
   res.redirect("/team");
 });
 
@@ -52,7 +61,6 @@ app.get("/team/:id", async (req, res) => {
 app.get("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findById(req.params.id);
   res.render("./employees/edit", { employee });
-  // res.send(req.params);
 });
 
 app.put("/team/:id/edit", async (req, res) => {
