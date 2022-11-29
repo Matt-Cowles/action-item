@@ -106,9 +106,9 @@
                 <!-- If item has new update, it will display it at the top of action item drop down menu -->
 
                 <% if(item.newUpdate === true ) { %>
-                <label for="update" class="form-control mt-3" style="background-color: #f2f589">
+                <label for="update" class="form-control mt-3">
                   <span class="fw-bold">New Update:</span>
-                  <span class="ms-3"><%=item.update[item.update.length - 1]%></span>
+                  <span class="ms-2"><%=item.update[item.update.length - 1]%></span>
                 </label>
                 <form action="/item/<%=item.id%>/confirm-update?_method=PUT" method="POST">
                   <button class="btn btn-outline-primary mt-2 w-50 offset-3 mb-5">Confirm Update</button>

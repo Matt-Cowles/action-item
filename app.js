@@ -129,7 +129,9 @@ app.put("/item/:id/confirm-update", async (req, res) => {
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
   item.newUpdate = false;
+  employee[0].newUpdate = false;
   await item.save();
+  await employee[0].save();
   res.redirect(`/team/${employeeID}`);
 });
 
