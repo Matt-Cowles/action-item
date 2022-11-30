@@ -52,9 +52,10 @@ app.post("/employee", async (req, res) => {
 });
 
 app.get("/team/:id", async (req, res) => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const employee = await Employee.findById(req.params.id);
   const items = await Item.find({ owner: req.params.id });
-  res.render("./employees/employee", { employee, items });
+  res.render("./employees/employee", { employee, items, months });
 });
 
 app.get("/team/:id/edit", async (req, res) => {

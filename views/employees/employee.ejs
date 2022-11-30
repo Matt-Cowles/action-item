@@ -125,7 +125,11 @@
                     </tr>
                     <tr>
                       <th scope="row">Due Date:</th>
-                      <td><%=item.dueDate%>></td>
+                        <td>
+                          <%=item.dueDate.getDate()%>
+                          <%=months[item.dueDate.getMonth()]%>
+                          <%=item.dueDate.getFullYear()%>
+                      </td>
                     </tr>
                     <tr>
                       <th scope="row">Updates:</th>
@@ -133,8 +137,8 @@
                         <ul class="form-control list-group list-group-flush">
                           <% if (item.update.length > 0) { %>
                             <% for(let update of item.update) { %>
-                            <li class="list-group-item"><%=update%></li>
-                          <% } %>
+                              <li class="list-group-item"><%=update%></li>
+                            <% } %>
                           <% } else { %>
                               <li class="list-group-item text-center">No Updates Have Been Made</li>
                           <% } %> 
