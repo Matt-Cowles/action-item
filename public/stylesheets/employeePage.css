@@ -1,0 +1,6 @@
+.completed-item {
+  background-color: #f6fdfd;
+}
+.completed-item:hover {
+  background-color: #edfeff;
+}

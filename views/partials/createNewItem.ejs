@@ -1,29 +1,29 @@
 <div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Action Item</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form action="/team/<%=employee._id%>/new-item" method="POST">
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Title:</label>
-                      <input type="text" class="form-control" id="recipient-name" name="item[title]">
-                    </div>
-                    <div class="mb-3">
-                      <label for="message-text" class="col-form-label">Description:</label>
-                      <textarea class="form-control" id="message-text" name="item[desc]"></textarea>
-                    </div>
-                    <div class="mb-3 mt-4">
-                      <label for="message-text" class="col-form-label me-2">Due Date:</label>
-                      <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
-                    </div>
-                    <hr class="w-100 mt-5" />
-                    <button class="btn btn-primary offset-3 mt-3 mb-3 w-50">Create Action Item</button>
-                  </div>
-                </form>
-              </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Action Item</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/team/<%=employee._id%>/new-item" method="POST">
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="recipient-name" name="item[title]">
             </div>
-          </div>
-          <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">New Item</a>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Description:</label>
+                <textarea class="form-control" id="message-text" name="item[desc]"></textarea>
+            </div>
+            <div class="mb-3 mt-4">
+                <label for="message-text" class="col-form-label me-2">Due Date:</label>
+                <input type="date" class="form form-md mb-3 mt-2" aria-label=".form-md example" name="item[dueDate]" />
+            </div>
+            <hr class="w-100 mt-5" />
+            <button class="btn btn-primary offset-3 mt-3 mb-3 w-50">Create Action Item</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<a class="btn btn-outline-primary mt-4 w-50 mb-5 offset-3" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Create a New Action Item</a>
