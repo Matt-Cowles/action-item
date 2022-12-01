@@ -98,10 +98,6 @@ app.post("/team/:id/new-item", async (req, res) => {
   res.redirect(`/team/${employee._id}`);
 });
 
-app.get("/item/new", (req, res) => {
-  res.render("./items/new");
-});
-
 app.get("/item/:id", async (req, res) => {
   const item = await Item.findById(req.params.id);
   res.render("./items/complete", { item });
