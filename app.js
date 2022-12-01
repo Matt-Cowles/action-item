@@ -59,13 +59,10 @@ app.get("/team/:id", async (req, res) => {
   const items = await Item.find({ owner: req.params.id });
 
   const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
   const trueDate = currentDate.getDate() + dayCount[currentDate.getMonth()];
-  console.log(trueDate);
 
-  // const shortTermItems = await Item.find({ dueDate: trueDate > 30 });
-  // console.log(shortTermItems);
-
-  res.render("./employees/employee", { employee, items, months, dayCount, trueDate });
+  res.render("./employees/employee", { employee, items, months, dayCount, trueDate, currentYear });
 });
 
 app.get("/team/:id/edit", async (req, res) => {
