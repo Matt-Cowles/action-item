@@ -69,11 +69,13 @@
                 <th scope="row">Updates:</th>
                 <td>
                     <% if (item.update.length > 0) { %>
+                        <% updateCounter = 0 %>
                         <ol class="list-group list-group-numbered">
                         <% for(let update of item.update) { %>
                             <li class="list-group-item">
-                                <span class="ms-3"><%=update%></span>
+                                <%- include ('../partials/editUpdate', { update, updateCounter }) %>
                             </li>
+                            <% updateCounter++ %>
                             <% } %>
                         </ol>
                     <% } else { %>
