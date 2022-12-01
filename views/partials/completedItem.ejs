@@ -1,22 +1,23 @@
-<div class="modal fade" id="completedItemsMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="completedItemsMenu<%=completedCount%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"><%=item.title%></h1>
+        <h1 class="modal-title fs-3" id="exampleModalLabel"><%=item.title%></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="message-text" class="col-form-label">Description:</label>
+          <label for="message-text" class="col-form-label fs-6 fw-bold">Description:</label>
           <span class="ms-2"><%=item.desc%></span>
         </div>
         <div class="mb-3 mt-4">
-          <label for="message-text" class="col-form-label me-2">Due Date:</label>
+          <label for="message-text" class="col-form-label me-2 fs-6 fw-bold">Due Date:</label>
           <span><%=item.dueDate.getDate()%> <%=months[item.dueDate.getMonth()]%> <%=item.dueDate.getFullYear()%></span>
         </div>
         <div class="mb-3 mt-4">
-          <label for="message-text" class="col-form-label me-2">Updates:</label>
+          <label for="message-text" class="col-form-label me-2 fs-6 fw-bold">Updates:</label>
           <div>
+            <% if (item.update.length > 0) { %>
             <ol class="list-group list-group-numbered">
               <% for(let update of item.update) { %>
               <li class="list-group-item">
@@ -24,6 +25,11 @@
               </li>
               <% } %>
             </ol>
+            <% } else { %>
+            <ul class="form-control">
+              <li class="list-group-item text-center">No Updates Were Made</li>
+            </ul>
+            <% } %>
           </div>
         </div>
         <hr class="w-100 mt-5" />
@@ -35,5 +41,5 @@
   </div>
 </div>
 <div class="list-group">
-  <a class="btn completed-item w-50 offset-3" data-bs-toggle="modal" href="#completedItemsMenu" role="button"><%=item.title%></a>
+  <a class="btn completed-item" data-bs-toggle="modal" href="#completedItemsMenu<%=completedCount%>" role="button"><%=item.title%></a>
 </div>

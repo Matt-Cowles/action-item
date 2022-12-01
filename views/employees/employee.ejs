@@ -21,9 +21,10 @@
       <hr class="w-25 m-auto mb-3" />
     </div>
 
-    <% let i = 1 %>
-
+    
     <div class="container">
+      <% let i = 1 %>
+
       <!-- Short Term Action Items -->
       <div class="offset-1 mb-5 w-75">
         <div class="d-flex justify-content-between">
@@ -32,7 +33,7 @@
         <ol class="mt-3">
           <% for (let item of items) { %>
 
-          <!-- Checks if the dueDate is less than 30 days pass the current date and that the due date and current date are within the same year-->
+          <!-- Checks if the dueDate is less than 30 days pass the current date and that the due date and current date are within the same year -->
           <% if (item.dueDate.getDate() + dayCount[item.dueDate.getMonth()] < trueDate + 30 && item.dueDate.getFullYear() === currentYear) { %>
 
           <!-- Creates list of action items -->
@@ -63,10 +64,13 @@
       <button class="btn w-50 offset-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="background-color: #ebf2fb">Completed</button>
 
       <div class="collapse w-50 offset-3" id="collapseExample">
+        <% let completedCount = 1 %>
         <%for (let item of items) { %> <% if (item.complete === true) { %>
-            <%- include ('../partials/completedItem', {item}) %>
-        </div>
-        <% } %> <% } %>
+
+          <!-- Displays all the action items marked as complete and creates a button and popup window for it -->
+            <%- include ('../partials/completedItem', {item, completedCount}) %>
+            <% } completedCount++ %> <% } %>
+          </div>
       </div>
     </div>
   </div>
