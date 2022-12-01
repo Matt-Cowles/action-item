@@ -25,8 +25,11 @@
           <%- include ('../partials/createNewItem', {employee}) %>
         </div>
         <ol class="mt-3">
+          <% for (let item of items) { %>
+          <!-- Checks if the dueDate is greater than 30 days pass the current date -->
+          <% if (item.dueDate.getDate() + dayCount[item.dueDate.getMonth()] < trueDate + 30) { %>
           <!-- Creates list of action items -->
-          <%- include ('../partials/actionItem', {items}) %>
+          <%- include ('../partials/actionItem', {items}) %> <% }} %>
         </ol>
       </div>
 

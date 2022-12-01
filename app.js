@@ -65,7 +65,7 @@ app.get("/team/:id", async (req, res) => {
   // const shortTermItems = await Item.find({ dueDate: trueDate > 30 });
   // console.log(shortTermItems);
 
-  res.render("./employees/employee", { employee, items, months });
+  res.render("./employees/employee", { employee, items, months, dayCount, trueDate });
 });
 
 app.get("/team/:id/edit", async (req, res) => {
