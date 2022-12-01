@@ -123,23 +123,27 @@ app.put("/item/:id/edit", async (req, res) => {
 app.put("/item/:id/new-update", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id);
   const employee = await Employee.find(item.owner);
-  const employeeID = employee[0].id;
   item.newUpdate = true;
   employee[0].newUpdate = true;
   await item.update.push(req.body.item.update);
   await item.save();
   await employee[0].save();
+
+  const employeeID = employee[0].id;
   res.redirect(`/team/${employeeID}`);
 });
 
 app.put("/item/:id/confirm-update", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
   const employee = await Employee.find(item.owner);
-  const employeeID = employee[0].id;
   item.newUpdate = false;
-  employee[0].newUpdate = false;
   await item.save();
+
+  const itemsWithUpdate = await Item.find({ newUpdate: true });
+  itemsWithUpdate.length === 0 ? (employee[0].newUpdate = false) : (employee[0].newUpdate = true);
   await employee[0].save();
+
+  const employeeID = employee[0].id;
   res.redirect(`/team/${employeeID}`);
 });
 
