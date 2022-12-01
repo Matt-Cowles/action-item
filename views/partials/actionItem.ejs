@@ -68,15 +68,19 @@
             <tr>
                 <th scope="row">Updates:</th>
                 <td>
-                <ul class="form-control list-group list-group-flush">
                     <% if (item.update.length > 0) { %>
-                    <% for(let update of item.update) { %>
-                        <li class="list-group-item"><%=update%></li>
-                    <% } %>
+                        <ol class="list-group list-group-numbered">
+                        <% for(let update of item.update) { %>
+                            <li class="list-group-item">
+                                <span class="ms-3"><%=update%></span>
+                            </li>
+                            <% } %>
+                        </ol>
                     <% } else { %>
-                        <li class="list-group-item text-center">No Updates Have Been Made</li>
+                        <ul class="form-control">
+                            <li class="list-group-item text-center">No Updates Have Been Made</li>
+                        </ul>
                     <% } %> 
-                </ul>
                 </td>
             </tr>
             </tbody>
