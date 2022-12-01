@@ -53,8 +53,18 @@ app.post("/employee", async (req, res) => {
 
 app.get("/team/:id", async (req, res) => {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+
   const employee = await Employee.findById(req.params.id);
   const items = await Item.find({ owner: req.params.id });
+
+  const currentDate = new Date();
+  const trueDate = currentDate.getDate() + dayCount[currentDate.getMonth()];
+  console.log(trueDate);
+
+  // const shortTermItems = await Item.find({ dueDate: trueDate > 30 });
+  // console.log(shortTermItems);
+
   res.render("./employees/employee", { employee, items, months });
 });
 
