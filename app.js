@@ -84,7 +84,7 @@ app.put("/team/:id/edit", async (req, res) => {
 
 app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
-  req.flash("success", `${employee.name} was succuessfully removed from the team.`);
+  req.flash("success", `${employee.name} was removed from the team.`);
   res.redirect("/team");
 });
 
@@ -95,12 +95,8 @@ app.post("/team/:id/new-item", async (req, res) => {
   await item.save();
   await employee.items.push(item);
   await employee.save();
+  req.flash("success", "Successfully created your action item!");
   res.redirect(`/team/${employee._id}`);
-});
-
-app.get("/item/:id", async (req, res) => {
-  const item = await Item.findById(req.params.id);
-  res.render("./items/complete", { item });
 });
 
 app.get("/item/:id/edit", async (req, res) => {
