@@ -22,9 +22,11 @@
       <div class="offset-1 mb-5 w-75">
         <div class="d-flex justify-content-between">
           <span>Short Term -</span>
+          <!-- Creates new Item button with popup form -->
           <%- include ('../partials/createNewItem', {employee}) %>
         </div>
         <ol class="mt-3">
+          <!-- Creates list of action items -->
           <%- include ('../partials/actionItem', {items}) %>
         </ol>
       </div>
@@ -34,11 +36,11 @@
       <div class="offset-1 mb-5 w-75">
         <div class="d-flex justify-content-between">
           <span>Long Term -</span>
-
+          <!-- Creates new Item button with popup form -->
           <%- include ('../partials/createNewItem', {employee}) %>
         </div>
-
         <ol class="mt-3">
+          <!-- Creates list of action items -->
           <%- include ('../partials/actionItem', {items}) %>
         </ol>
       </div>
