@@ -9,37 +9,39 @@
         <form action="/item/<%=item.id%>/edit?_method=PUT" method="POST">
         <label class="fw-bold" for="original-update">Original Update -</label>
             <div class="mt-2">
-                <input class="input-group text-center border" id="original-update" name="original[]" value="<%= update %>" readonly tabindex="-1">
+                <textarea class="input-group text-center border" id="original-update" name="original[]" style="height: 75px" tabindex="-1" readonly><%= update %></textarea>
             </div>
       </div>
       <div class="mt-4">
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="editUpdate[]"></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 130px" name="editUpdate[]"></textarea>
                 <label for="floatingTextarea2">Enter New Update:</label>
             </div>
         </div>
       <div class="modal-footer d-flex justify-content-between">
         <button class="btn btn-primary mt-3 mb-3">Confirm Changes!</button>
       </form>
-        <button class="btn btn-outline-danger mt-3 mb-3" data-bs-target="#confirmDeleteUpdate" data-bs-toggle="modal">Delete Update</button>
+        <button class="btn btn-outline-danger mt-3 mb-3" data-bs-target="#confirmDeleteUpdate<%=i%><%=updateCounter%>" data-bs-toggle="modal">Delete Update</button>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="confirmDeleteUpdate" aria-hidden="true" aria-labelledby="confirmDeleteUpdate" tabindex="-1">
+<div class="modal fade" id="confirmDeleteUpdate<%=i%><%=updateCounter%>" aria-hidden="true" aria-labelledby="confirmDeleteUpdate" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="confirmDeleteUpdate">Are You Sure You Want To Delete This Update?</h1>
+        <h1 class="modal-title fs-5 offset-3" id="confirmDeleteUpdate">DELETE THIS UPDATE?</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form action="/item/<%=item.id%>/edit?_method=DELETE" method="POST">
       <div class="modal-body">
-        You can always click cancel to go back... If not, this update will be deleted forever.
+            <div class="mt-2">
+                <textarea class="input-group text-center border" id="original-update" name="original[]" style="height: 75px" tabindex="-1" readonly><%= update %></textarea>
+            </div>
       </div>
       <div class="modal-footer d-flex justify-content-between">
         <button class="btn btn-secondary ms-3" data-bs-target="#editUpdate<%=i%><%=updateCounter%>" data-bs-toggle="modal">Cancel</button>
-        <form action="/item/<%=item.id%>/edit?_method=DELETE" method="POST">
-            <button class="btn btn-danger me-3" name="deleteUpdate[]">Delete!</button>
+            <button class="btn btn-danger me-3">Delete!</button>
         </form>
       </div>
     </div>

@@ -85,15 +85,6 @@ app.put("/team/:id/edit", async (req, res) => {
   }
 });
 
-app.delete("/team/:id/edit", async (req, res) => {
-  const employee = await Employee.findByIdAndDelete(req.params.id);
-
-  const firstName = employee.name.split(" ")[0];
-
-  req.flash("success", `${firstName} was removed from the team.`);
-  res.redirect("/team");
-});
-
 app.post("/team/:id/new-item", async (req, res) => {
   const item = new Item(req.body.item);
   const employee = await Employee.findById(req.params.id);
@@ -105,18 +96,19 @@ app.post("/team/:id/new-item", async (req, res) => {
   res.redirect(`/team/${employee._id}`);
 });
 
-app.get("/item/:id/edit", async (req, res) => {
-  const item = await Item.findById(req.params.id);
-  res.render("./items/edit", { item });
+app.delete("/team/:id/edit", async (req, res) => {
+  const employee = await Employee.findByIdAndDelete(req.params.id);
+
+  const firstName = employee.name.split(" ")[0];
+
+  req.flash("success", `${firstName} was removed from the team.`);
+  res.redirect("/team");
 });
 
 app.put("/item/:id/edit", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
 
-  console.log(req.body);
-  console.log(req.body.item);
-
-  if (req.body.editUpdate) {
+  if (req.body.original) {
     const editedUpdate = req.body.editUpdate[0];
     const originalUpdate = req.body.original[0];
     const updateIndex = item.update.indexOf(`${originalUpdate}`);
@@ -139,6 +131,25 @@ app.put("/item/:id/edit", async (req, res) => {
 
   await item.save();
 
+  const employee = await Employee.find(item.owner);
+  const employeeID = employee[0].id;
+  res.redirect(`/team/${employeeID}`);
+});
+
+app.delete("/item/:id/edit", async (req, res) => {
+  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+
+  if (req.body.original) {
+    const originalUpdate = req.body.original[0];
+
+    await item.updateOne({
+      $pull: {
+        update: originalUpdate,
+      },
+    });
+  }
+
+  await item.save();
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
   res.redirect(`/team/${employeeID}`);
