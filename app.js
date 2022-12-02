@@ -40,6 +40,10 @@ app.use((req, res, next) => {
 app.use("/team", employeeRoutes);
 app.use("/item", itemRoutes);
 
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
 app.get("*", (req, res) => {
   res.render("wrongLocation");
 });
