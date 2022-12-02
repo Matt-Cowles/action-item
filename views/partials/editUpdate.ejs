@@ -2,19 +2,19 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Edit Update:</h1>
+        <h1 class="modal-title fs-5 fw-bolder offset-4" id="exampleModalToggleLabel">Edit Update</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label class="fw-bold" for="">Original Update -</label>
+        <form action="/item/<%=item.id%>/edit?_method=PUT" method="POST">
+        <label class="fw-bold" for="original-update">Original Update -</label>
             <div class="mt-2">
-                <%= update %>
+                <input class="input-group text-center border" id="original-update" name="original[]" value="<%= update %>" readonly tabindex="-1">
             </div>
       </div>
       <div class="mt-4">
-        <form action="/item/<%=item.id%>/edit?_method=PUT" method="POST">
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="item[update]"></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="editUpdate[]"></textarea>
                 <label for="floatingTextarea2">Enter New Update:</label>
             </div>
         </div>
@@ -45,4 +45,8 @@
     </div>
   </div>
 </div>
-<a class="ms-3 text-decoration-none text-dark update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button"><%=update%></a>
+<% if (update.length > 0) { %>
+    <a class="ms-3 text-decoration-none text-dark update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button"><%=update%></a>
+<% } else { %>
+    <a class="ms-3 text-decoration-none text-secondary update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button">( This update entry was blank )</a>
+<% } %> 
