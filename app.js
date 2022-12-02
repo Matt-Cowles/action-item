@@ -114,33 +114,26 @@ app.put("/item/:id/edit", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
 
   if (req.body.editUpdate) {
-    try {
-      const editedUpdate = req.body.editUpdate[0];
-      const originalUpdate = req.body.original[0];
-      const originalIndex = item.update.indexOf(`${originalUpdate}`);
-      await item.updateOne({
-        $push: {
-          update: {
-            $each: [`${editedUpdate}`],
-            $position: originalIndex,
-          },
-        },
-        $pull: {
-          update: originalUpdate,
-        },
-      });
-      // await item.updateOne({
-      //   $push: { update: { editedUpdate } },
-      //   $pull: { update: { $in: req.body.original } },
-      // });
+    const editedUpdate = req.body.editUpdate[0];
+    const originalUpdate = req.body.original[0];
+    const originalIndex = item.update.indexOf(`${originalUpdate}`);
 
-      // console.log("original update", originalUpdate);
-      // console.log("edited update:", editedUpdate);
-      await item.save();
-    } catch (e) {
-      console.log(e);
-      console.log(e.message);
-    }
+    await item.updateOne({
+      $push: {
+        update: {
+          $each: [`${editedUpdate}`],
+          $position: originalIndex,
+        },
+      },
+    });
+
+    await item.updateOne({
+      $pull: {
+        update: originalUpdate,
+      },
+    });
+
+    await item.save();
   }
 
   const employee = await Employee.find(item.owner);
