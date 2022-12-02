@@ -54,11 +54,11 @@
         <table class="table table-borderless ms-5 mt-3 w-75">
             <tbody>
             <tr>
-                <th scope="row">Description:</th>
-                <td><%=item.desc%></td>
+                <th class="w-25" scope="row">Description:</th>
+                <td colspan="2"><%=item.desc%></td>
             </tr>
             <tr>
-                <th scope="row">Due Date:</th>
+                <th class="w-25" scope="row">Due Date:</th>
                 <td>
                     <%=item.dueDate.getDate()%>
                     <%=months[item.dueDate.getMonth()]%>
@@ -66,7 +66,7 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row">Updates:</th>
+                <th class="w-25" scope="row">Updates:</th>
                 <td>
                     <% if (item.update.length > 0) { %>
                         <% updateCounter = 0 %>
@@ -74,8 +74,8 @@
                         <% for(let update of item.update) { %>
                             <li class="list-group-item">
                                 <%- include ('../partials/editUpdate', { update, updateCounter }) %>
+                                <% updateCounter++ %>
                             </li>
-                            <% updateCounter++ %>
                             <% } %>
                         </ol>
                     <% } else { %>
