@@ -47,7 +47,10 @@ app.get("/team/new", (req, res) => {
 app.post("/employee", async (req, res) => {
   const employee = new Employee(req.body.employee);
   await employee.save();
-  req.flash("success", `Welcome to the team ${employee.name}!`);
+
+  const firstName = employee.name.split(" ")[0];
+
+  req.flash("success", `Welcome to the team ${firstName}!`);
   res.redirect("/team");
 });
 
@@ -84,7 +87,10 @@ app.put("/team/:id/edit", async (req, res) => {
 
 app.delete("/team/:id/edit", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
-  req.flash("success", `${employee.name} was removed from the team.`);
+
+  const firstName = employee.name.split(" ")[0];
+
+  req.flash("success", `${firstName} was removed from the team.`);
   res.redirect("/team");
 });
 
@@ -106,9 +112,39 @@ app.get("/item/:id/edit", async (req, res) => {
 
 app.put("/item/:id/edit", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+
+  if (req.body.editUpdate) {
+    try {
+      const editedUpdate = req.body.editUpdate[0];
+      const originalUpdate = req.body.original[0];
+      const originalIndex = item.update.indexOf(`${originalUpdate}`);
+      await item.updateOne({
+        $push: {
+          update: {
+            $each: [`${editedUpdate}`],
+            $position: originalIndex,
+          },
+        },
+        $pull: {
+          update: originalUpdate,
+        },
+      });
+      // await item.updateOne({
+      //   $push: { update: { editedUpdate } },
+      //   $pull: { update: { $in: req.body.original } },
+      // });
+
+      // console.log("original update", originalUpdate);
+      // console.log("edited update:", editedUpdate);
+      await item.save();
+    } catch (e) {
+      console.log(e);
+      console.log(e.message);
+    }
+  }
+
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
-  await item.save();
   res.redirect(`/team/${employeeID}`);
 });
 
