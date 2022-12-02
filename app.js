@@ -132,9 +132,9 @@ app.put("/item/:id/edit", async (req, res) => {
         update: originalUpdate,
       },
     });
-
-    await item.save();
   }
+
+  await item.save();
 
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
