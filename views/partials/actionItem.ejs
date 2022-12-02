@@ -55,14 +55,12 @@
             <tbody>
             <tr>
                 <th class="w-25" scope="row">Description:</th>
-                <td><%=item.desc%></td>
+                <td><%- include ('../partials/editDesc', { item } )%></td>
             </tr>
             <tr>
                 <th class="w-25" scope="row">Due Date:</th>
                 <td>
-                    <%=item.dueDate.getDate()%>
-                    <%=months[item.dueDate.getMonth()]%>
-                    <%=item.dueDate.getFullYear()%>
+                    <%- include ('../partials/editDueDate', { item, months } )%>
                 </td>
             </tr>
             <tr>

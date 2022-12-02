@@ -38,15 +38,15 @@
       </div>
       <div class="modal-footer d-flex justify-content-between">
         <button class="btn btn-secondary ms-3" data-bs-target="#editUpdate<%=i%><%=updateCounter%>" data-bs-toggle="modal">Cancel</button>
-        <form action="/item/<%=item.id%>/delete-update?_method=DELETE" method="POST">
-            <button class="btn btn-danger me-3">Delete!</button>
+        <form action="/item/<%=item.id%>/edit?_method=DELETE" method="POST">
+            <button class="btn btn-danger me-3" name="deleteUpdate[]">Delete!</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 <% if (update.length > 0) { %>
-    <a class="ms-3 text-decoration-none text-dark update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button"><%=update%></a>
+    <a class="ms-3 text-decoration-none update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button"><%=update%></a>
 <% } else { %>
     <a class="ms-3 text-decoration-none text-secondary update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button">( This update entry was blank )</a>
 <% } %> 
