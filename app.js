@@ -7,6 +7,9 @@ const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const flash = require("connect-flash");
 
+const employeeRoutes = require("./routes/employees");
+const itemRoutes = require("./routes/items");
+
 const Employee = require("./models/employee");
 const Item = require("./models/item");
 
@@ -34,157 +37,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/team", async (req, res) => {
-  const employees = await Employee.find({});
-  const updatedItems = await Item.find({ newUpdate: true });
-  res.render("team", { employees, updatedItems });
-});
-
-app.get("/team/new", (req, res) => {
-  res.render("./employees/new");
-});
-
-app.post("/employee", async (req, res) => {
-  const employee = new Employee(req.body.employee);
-  await employee.save();
-
-  const firstName = employee.name.split(" ")[0];
-
-  req.flash("success", `Welcome to the team ${firstName}!`);
-  res.redirect("/team");
-});
-
-app.get("/team/:id", async (req, res) => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-
-  const employee = await Employee.findById(req.params.id);
-  const items = await Item.find({ owner: req.params.id });
-
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const trueDate = currentDate.getDate() + dayCount[currentDate.getMonth()];
-
-  res.render("./employees/employee", { employee, items, months, dayCount, trueDate, currentYear });
-});
-
-app.get("/team/:id/edit", async (req, res) => {
-  const employee = await Employee.findById(req.params.id);
-  res.render("./employees/edit", { employee });
-});
-
-app.put("/team/:id/edit", async (req, res) => {
-  try {
-    const employee = await Employee.findByIdAndUpdate(req.params.id, { ...req.body.employee });
-    req.flash("success", `Successfully updated ${employee.name} info!`);
-    res.redirect(`/team/${employee._id}`);
-  } catch (e) {
-    req.flash("error", `Failed to update ${employee.name} info`);
-    console.log("ERRRRRRRRORRRRR", e);
-    res.redirect(`/team/${employee._id}`);
-  }
-});
-
-app.post("/team/:id/new-item", async (req, res) => {
-  const item = new Item(req.body.item);
-  const employee = await Employee.findById(req.params.id);
-  item.owner = employee._id;
-  await item.save();
-  await employee.items.push(item);
-  await employee.save();
-  req.flash("success", "Successfully created your action item!");
-  res.redirect(`/team/${employee._id}`);
-});
-
-app.delete("/team/:id/edit", async (req, res) => {
-  const employee = await Employee.findByIdAndDelete(req.params.id);
-
-  const firstName = employee.name.split(" ")[0];
-
-  req.flash("success", `${firstName} was removed from the team.`);
-  res.redirect("/team");
-});
-
-app.put("/item/:id/edit", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
-
-  if (req.body.original) {
-    const originalUpdate = req.body.original[0];
-    const updateIndex = item.update.indexOf(`${originalUpdate}`);
-
-    if (req.body.editUpdate) {
-      const editedUpdate = req.body.editUpdate[0];
-
-      await item.updateOne({
-        $push: {
-          update: {
-            $each: [`${editedUpdate}`],
-            $position: updateIndex,
-          },
-        },
-      });
-    }
-
-    await item.updateOne({
-      $pull: {
-        update: originalUpdate,
-      },
-    });
-  }
-
-  await item.save();
-
-  const employee = await Employee.find(item.owner);
-  const employeeID = employee[0].id;
-  res.redirect(`/team/${employeeID}`);
-});
-
-app.delete("/item/:id/edit", async (req, res) => {
-  const id = req.params.id;
-  const item = await Item.findByIdAndDelete(id);
-
-  const employee = await Employee.find(item.owner);
-  const employeeID = employee[0].id;
-
-  req.flash("success", "Successfully removed that action item");
-  res.redirect(`/team/${employeeID}`);
-});
-
-app.put("/item/:id/new-update", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id);
-  const employee = await Employee.find(item.owner);
-  item.newUpdate = true;
-  employee[0].newUpdate = true;
-  await item.update.push(req.body.item.update);
-  await item.save();
-  await employee[0].save();
-
-  const employeeID = employee[0].id;
-  res.redirect(`/team/${employeeID}`);
-});
-
-app.put("/item/:id/confirm-update", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
-  const employee = await Employee.find(item.owner);
-  item.newUpdate = false;
-  await item.save();
-
-  const itemsWithUpdate = await Item.find({ newUpdate: true });
-  itemsWithUpdate.length === 0 ? (employee[0].newUpdate = false) : (employee[0].newUpdate = true);
-  await employee[0].save();
-
-  const employeeID = employee[0].id;
-  res.redirect(`/team/${employeeID}`);
-});
-
-app.put("/item/:id/mark-complete", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
-  const employee = await Employee.find(item.owner);
-  const employeeID = employee[0].id;
-  item.complete === false ? (item.complete = true) : (item.complete = false);
-  item.save();
-  res.redirect(`/team/${employeeID}`);
-});
+app.use("/team", employeeRoutes);
+app.use("/item", itemRoutes);
 
 app.get("*", (req, res) => {
   res.render("wrongLocation");
