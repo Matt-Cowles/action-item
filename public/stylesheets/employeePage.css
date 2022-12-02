@@ -4,3 +4,11 @@
 .completed-item:hover {
   background-color: #edfeff;
 }
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #88abb3;
+}
