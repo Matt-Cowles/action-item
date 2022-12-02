@@ -113,16 +113,19 @@ app.get("/item/:id/edit", async (req, res) => {
 app.put("/item/:id/edit", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
 
+  console.log(req.body);
+  console.log(req.body.item);
+
   if (req.body.editUpdate) {
     const editedUpdate = req.body.editUpdate[0];
     const originalUpdate = req.body.original[0];
-    const originalIndex = item.update.indexOf(`${originalUpdate}`);
+    const updateIndex = item.update.indexOf(`${originalUpdate}`);
 
     await item.updateOne({
       $push: {
         update: {
           $each: [`${editedUpdate}`],
-          $position: originalIndex,
+          $position: updateIndex,
         },
       },
     });
