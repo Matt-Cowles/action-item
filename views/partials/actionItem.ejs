@@ -55,7 +55,7 @@
             <tbody>
             <tr>
                 <th class="w-25" scope="row">Description:</th>
-                <td colspan="2"><%=item.desc%></td>
+                <td><%=item.desc%></td>
             </tr>
             <tr>
                 <th class="w-25" scope="row">Due Date:</th>
@@ -69,14 +69,12 @@
                 <th class="w-25" scope="row">Updates:</th>
                 <td>
                     <% if (item.update.length > 0) { %>
-                        <% updateCounter = 0 %>
                         <ol class="list-group list-group-numbered">
-                        <% for(let update of item.update) { %>
+                        <% item.update.forEach(function(update, updateCounter) {   %>
                             <li class="list-group-item">
-                                <%- include ('../partials/editUpdate', { update, updateCounter }) %>
-                                <% updateCounter++ %>
+                                <%- include ('../partials/editUpdate', { item, update, updateCounter }) %>
                             </li>
-                            <% } %>
+                            <% }) %>
                         </ol>
                     <% } else { %>
                         <ul class="form-control">

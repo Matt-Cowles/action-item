@@ -1,4 +1,4 @@
-<div class="modal fade" id="editUpdate<%=updateCounter%>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade" id="editUpdate<%=i%><%=updateCounter%>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,7 +37,7 @@
         You can always click cancel to go back... If not, this update will be deleted forever.
       </div>
       <div class="modal-footer d-flex justify-content-between">
-        <button class="btn btn-secondary ms-3" data-bs-target="#editUpdate<%=updateCounter%>" data-bs-toggle="modal">Cancel</button>
+        <button class="btn btn-secondary ms-3" data-bs-target="#editUpdate<%=i%><%=updateCounter%>" data-bs-toggle="modal">Cancel</button>
         <form action="/item/<%=item.id%>/delete-update?_method=DELETE" method="POST">
             <button class="btn btn-danger me-3">Delete!</button>
         </form>
@@ -45,5 +45,4 @@
     </div>
   </div>
 </div>
-<% updateCounter++ %>
-<a class="ms-3 text-decoration-none text-dark update-text" data-bs-toggle="modal" href="#editUpdate<%=updateCounter%>" role="button"><%=update%></a>
+<a class="ms-3 text-decoration-none text-dark update-text" data-bs-toggle="modal" href="#editUpdate<%=i%><%=updateCounter%>" role="button"><%=update%></a>
