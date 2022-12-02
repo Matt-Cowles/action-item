@@ -109,18 +109,21 @@ app.put("/item/:id/edit", async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
 
   if (req.body.original) {
-    const editedUpdate = req.body.editUpdate[0];
     const originalUpdate = req.body.original[0];
     const updateIndex = item.update.indexOf(`${originalUpdate}`);
 
-    await item.updateOne({
-      $push: {
-        update: {
-          $each: [`${editedUpdate}`],
-          $position: updateIndex,
+    if (req.body.editUpdate) {
+      const editedUpdate = req.body.editUpdate[0];
+
+      await item.updateOne({
+        $push: {
+          update: {
+            $each: [`${editedUpdate}`],
+            $position: updateIndex,
+          },
         },
-      },
-    });
+      });
+    }
 
     await item.updateOne({
       $pull: {
@@ -137,21 +140,13 @@ app.put("/item/:id/edit", async (req, res) => {
 });
 
 app.delete("/item/:id/edit", async (req, res) => {
-  const item = await Item.findByIdAndUpdate(req.params.id, { ...req.body.item });
+  const id = req.params.id;
+  const item = await Item.findByIdAndDelete(id);
 
-  if (req.body.original) {
-    const originalUpdate = req.body.original[0];
-
-    await item.updateOne({
-      $pull: {
-        update: originalUpdate,
-      },
-    });
-  }
-
-  await item.save();
   const employee = await Employee.find(item.owner);
   const employeeID = employee[0].id;
+
+  req.flash("success", "Successfully removed that action item");
   res.redirect(`/team/${employeeID}`);
 });
 
