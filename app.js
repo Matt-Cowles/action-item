@@ -19,7 +19,11 @@ async function main() {
 main().then(() => console.log("Connected to db"));
 main().catch((err) => console.log("AN ERROR!", err));
 
-const sessionOptions = { secret: "thisisabadsecret", resave: false, saveUninitialized: true };
+const sessionOptions = {
+  secret: "thisisabadsecret",
+  resave: false,
+  saveUninitialized: true,
+};
 app.use(session(sessionOptions));
 
 app.engine("ejs", ejsMate);
