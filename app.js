@@ -6,6 +6,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const flash = require("connect-flash");
+const MongoStore = require("connect-mongo");
+require("dotenv").config();
 
 const employeeRoutes = require("./routes/employees");
 const itemRoutes = require("./routes/items");
@@ -13,13 +15,21 @@ const itemRoutes = require("./routes/items");
 const Employee = require("./models/employee");
 const Item = require("./models/item");
 
+const dbUrl = process.env.DB_URL;
+// "mongodb://localhost:27017/action-item"
 async function main() {
-  await mongoose.connect("mongodb://localhost:27017/action-item");
+  await mongoose.connect(dbUrl);
 }
 main().then(() => console.log("Connected to db"));
 main().catch((err) => console.log("AN ERROR!", err));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 60 * 60,
+});
+
 const sessionOptions = {
+  store,
   secret: "thisisabadsecret",
   resave: false,
   saveUninitialized: true,
