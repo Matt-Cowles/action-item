@@ -1,41 +1,41 @@
 module.exports = [
   {
-    name: "Imani Gregory",
+    name: "Employee 1",
     position: "MFG Supervisor",
     items: [""],
   },
   {
-    name: "Christopher Callahan",
+    name: "Employee 2",
     position: "MFG Speacialist",
     items: [""],
   },
   {
-    name: "James Holmes",
+    name: "Employee 3",
     position: "MFG Senior",
     items: [""],
   },
   {
-    name: "Matt Cowles",
+    name: "Employee 4",
     position: "MFG Associate IV",
     items: [""],
   },
   {
-    name: "Michelle Rodriguez",
+    name: "Employee 5",
     position: "MFG Associate IV",
     items: [""],
   },
   {
-    name: "Deena Haj",
+    name: "Employee 6",
     position: "MFG Associate III",
     items: [""],
   },
   {
-    name: "Max Essig",
+    name: "Employee 7",
     position: "MFG Assocaite III",
     items: [""],
   },
   {
-    name: "Jazmin Batiste",
+    name: "Employee 8",
     position: "MFG Associate III",
     items: [""],
   },
