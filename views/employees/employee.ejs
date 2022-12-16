@@ -75,3 +75,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  const windowSize = window.innerWidth;
+  if (windowSize <= 958) {
+    const itemList = document.getElementsByTagName("ol");
+    for (let item of itemList) {
+      item.classList.add("list-group");
+    }
+  }
+</script>
